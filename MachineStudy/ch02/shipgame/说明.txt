@@ -1,0 +1,51 @@
+飞船游戏
+所有绘制在屏幕上的坐标都是通过rect.x,rect.y这种控制，这样才有效
+
+
+alien_invasion.py 主类
+    gf.check_events(ship)  不断监听键盘事件
+    ship.update()  不断更新飞船的位置等信息
+    gf.update_screen(ai_settings,screen,ship)  不停的重绘屏幕
+ship 飞船类
+    def blitme(self):  在屏幕上绘制飞船
+    def update(self):  不断更新其位置的坐标，重绘屏幕时就会根据这些坐标重绘飞船位置
+settings  一些配置
+game_functions 功能设置
+    def check_keydown_events(event,ship):  监听键盘按下事件
+    def check_keyup_events(event,ship):  监听键盘弹起事件
+    def update_screen(ai_settings,screen,ship):  定义的重绘屏幕和飞船方法
+            pygame.display.flip()  这就是Pygame中重绘屏幕方法
+
+    如果pygame退出了那么调用sys.exit退出程序
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+
+    def update_aliens(ai_settings,stats,screen,ship,aliens,bullets):  更新外星人
+        if pygame.sprite.spritecollideany(ship,aliens):  飞船和外星人碰撞检测
+
+    def update_bullets(ai_settings,screen,ship,aliens,bullets): 更新子弹，其中有子弹和外星人碰撞检测
+        collisions = pygame.sprite.groupcollide(bullets,aliens,True,True)#第一True表示子弹在碰到外星人后消失，第二个True表示外星人消失
+
+alien是外星人飞船类
+
+bullet是子弹类
+
+game_stats是统计类，目前定义了飞船的生命数目，游戏是否结束标志
+
+总体效果就是:aliens初始了一批加入群组，然后向右移动，移动到边缘就下降一定距离，后向右一定，如此左右往复，碰撞到ship或者alien到达screen边缘后就算ship
+            被撞击，此时检查ship剩余生命条数，<0则停止游戏，否则就将bullets和aliens两个组清空再来一次
+            ship可以发射bullet，bullet碰撞到aliens后就互相销户，
+            碰撞检测使用的是pygame模块的功能
+
+button类是一个展示在屏幕上的play按钮
+    点击play按钮游戏开始，或者游戏重新开始
+    self.font = pygame.font.SysFont(None,48)#第一个参数是字体，此处使用默认字体,48是文本字号   用来设置绘制在屏幕中文本的字体，字号
+    self.rect = pygame.Rect(0,0,self.width,self.height)  创建一个矩形
+
+    将此msg变成一个图片
+    self.msg_image = self.font.render(msg,True,self.text_color,self.button_color)#参数二是开启还是关闭反锯齿功能 True开启
+
+game_functions中添加检测鼠标按下事件： event.type == pygame.MOUSEBUTTONDOWN:
+        mouse_x,mouse_y = pygame.mouse.get_pos()  此处返回鼠标按下位置的元组
+        play_button.rect.collidepoint(mouse_x,mouse_y):#位置检测（案例第三种碰撞检测）
