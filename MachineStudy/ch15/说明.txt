@@ -1,0 +1,8 @@
+
+下载地址： pypi
+安装matplotlib:
+cd D:\python_scripts_lib
+python -m pip install --user matplotlib-2.1.0-cp36-cp36m-win_amd64.whl
+
+mpl_squares是简单应用matplotlib画图的文件，用来绘制折线图
+scatter_squares.py是用来绘制散点图

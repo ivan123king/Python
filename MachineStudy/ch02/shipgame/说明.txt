@@ -1,3 +1,9 @@
+
+下载地址： pypi 或者  https://www.lfd.uci.edu/~gohlke/pythonlibs/#pygame  或者  https://bitbucket.org/pygame/pygame/downloads
+安装pygame:  cp36表示python 3.6版本  win是Windows系统，amd64是64位版本
+cd D:\python_scripts_lib    pygame-1.9.3-cp36-cp36m-win_amd64.whl所在目录
+python -m pip install --user pygame-1.9.3-cp36-cp36m-win_amd64.whl
+
 飞船游戏
 所有绘制在屏幕上的坐标都是通过rect.x,rect.y这种控制，这样才有效
 
@@ -26,6 +32,7 @@ game_functions 功能设置
 
     def update_bullets(ai_settings,screen,ship,aliens,bullets): 更新子弹，其中有子弹和外星人碰撞检测
         collisions = pygame.sprite.groupcollide(bullets,aliens,True,True)#第一True表示子弹在碰到外星人后消失，第二个True表示外星人消失
+        collisions.values() 返回aliens的列表
 
 alien是外星人飞船类
 
@@ -49,3 +56,8 @@ button类是一个展示在屏幕上的play按钮
 game_functions中添加检测鼠标按下事件： event.type == pygame.MOUSEBUTTONDOWN:
         mouse_x,mouse_y = pygame.mouse.get_pos()  此处返回鼠标按下位置的元组
         play_button.rect.collidepoint(mouse_x,mouse_y):#位置检测（案例第三种碰撞检测）
+
+round( x [, n]  ) 一般四舍五入，保留小数点后面n位， 负数将圆整到最近的10,100,1000等整数倍
+"{:,}".format(rounded_score)   以逗号分隔数据
+
+
