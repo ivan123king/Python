@@ -6,3 +6,34 @@ python -m pip install --user matplotlib-2.1.0-cp36-cp36m-win_amd64.whl
 
 mpl_squares是简单应用matplotlib画图的文件，用来绘制折线图
 scatter_squares.py是用来绘制散点图
+    #根据每个点的y值来设置颜色映射：就是渐变颜色  c指定根据什么值进行渐变  cmap=plt.cm.Blues颜色  由浅到深
+    plt.scatter(x_values,y_values,c=y_values,cmap=plt.cm.Blues,edgecolor='none',s=50)
+    #将图表保存到scatter_squares.py所在目录，保存为png图片，bbox_inches='tight'将周围多余空白区域裁剪掉
+    plt.savefig('squares_plot.png',bbox_inches='tight');
+
+rw_visual.py和random_walk.py是一组，random_walk是用来产生随机数的类，rw_visual是用来绘制此随机数列表的散点图
+
+random.choice()    choice() 方法返回一个列表，元组或字符串的随机项。
+random.randint(1,6)  返回  1<=x<=6的随机数
+range(1,6) 生成1<=x<6的数，不是随机数，也不是列表
+list(range(1,6))才会生成[1,2,3,4,5]的列表
+count() 方法用于统计字符串里某个字符出现的次数。可选参数为在字符串搜索的开始与结束位置。
+ [str(value) for value in range(2,die_1.num_sides+die_2.num_sides+1)]  此是将一个数值列表变为一个字符串列表
+
+安装pygal
+python -m pip install --user pygal
+
+die.py,die_visual.py,dice_visual.py,different_dice.py都是pygal的列子
+die.py是骰子类
+die_visual.py是扔一个骰子的统计描绘SVG柱状图
+dice_visual.py是扔两个骰子统计描绘SVG柱状图
+记住这种生成列表方式和这种for循环方式：
+    results = [die_1.roll()+die_2.roll() for roll_num in range(1000)]
+    等同于
+    results = []
+    for roll_num in range(10000):
+        result = die_1.roll()+die_2.roll()
+        results.append(result)
+
+    frequencies = [results.count(value) for value in range(2,die_1.num_sides+die_2.num_sides+1)]
+
