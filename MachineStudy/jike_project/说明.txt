@@ -1,0 +1,52 @@
+python极客项目编程书籍的练习目录：
+   ch01是一个音乐歌曲列表
+    plist = plistlib.readPlist(fileName) ------看test-data中的maya.xml，读取key为键，Key后面的是value，此xml是这种plistlib可以识别的格式
+    tracks = plist['Tracks']  -------通过key的值来取值
+    其中有通过在命令行传参，解析参数运行不同方法------重点学习下
+
+   ch02是使用turtle画图形（万花筒案例）
+    drawcircle.py 是一个简单案例，就是绘制一个圆
+    turtle.onkey(function,"s") 按s键调用此function方法
+    会报错： RecursionError: maximum recursion depth exceeded  这是python递归深度的限制
+
+    ch03 是使用 matplotlib.pyplot绘图 和使用numpy库产生数组，是模拟细胞生存死亡
+        从数组[0,255]中随机生成 N*N个数据，其中0.2,0.8分别表示0和255出现的概率，reshape(N,M)是把这N*N个数据重新变为N行M列的数组
+        numpy.random.choice([0,255],N*N,p=[0.2,0.8]).reshape(N,M)
+
+    ch04 是模拟乐器弹奏，利用Karplus-Strong算法，同时保存wav音频文件
+        time.sleep(0.5)  线程睡眠0.5秒
+        os.path.exists(fileName)  判断此文件是否存在
+
+    ch05 是模拟类鸟群的行为
+       from numpy.linag import norm
+        norm([4,3]) = 5
+        #鼠标点击事件监听处理
+        fig = plt.figure()
+        cid = fig.canvas.mpl_connect('button_press_event',boids.buttonPress)
+
+    ch06 将图像变为ASCII文本图像
+        PIL的Image可读取图片：
+            image = Image.open(fileName).convert('L')
+        得到图片宽高：
+            W,H = image.size[0],image.size[1]
+        提取图片中某一个小块：
+             img = image.crop((x1,y1,x2,y2))
+
+    ch07 是为图片加马赛克
+        原理是读取图片然后为图片的某些小块做处理
+        numpy.average(array)  求此数组的平均值
+            如果array是一维数组  [3,4]= 3.5
+            如果是二维数组  [[3,4],[1,2]] = [2,3]
+
+        random.shuffle(input_images)   将此数组随机排列
+        Image对象：可以使用thumbnail调整图片大小  dims是一个整数元组
+        img.thumbnail(dims)
+
+        将grid_img(Image)的指定部分粘贴为images[index](Image对象)
+        grid_img.paste(images[index],(col*width,row*height))  paste方法用来图像局部粘贴
+
+     ch08  将平面图变成深度图
+         原理： 替换其中图片的像素颜色明暗
+
+
+

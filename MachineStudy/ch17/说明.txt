@@ -1,0 +1,6 @@
+
+安装request模块
+python -m pip install --user requests
+
+此章节完成任务为下载github上一个项目到本地
+
